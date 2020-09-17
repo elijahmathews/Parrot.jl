@@ -2,5 +2,5 @@ using Test
 
 @testset "Hello World" begin
 	message = "Hello world!"
-	@test messag = "Hello world!"
+	@test message == "Hello world!"
 end
