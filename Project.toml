@@ -1,0 +1,4 @@
+name = "ProspectorML"
+uuid = "639c8201-8a61-4ebb-ad4a-e16623478ddb"
+authors = ["Elijah Mathews <pgp@elijahmathews.com>"]
+version = "0.1.0"
