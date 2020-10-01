@@ -1,24 +1,26 @@
 language: julia
 
-os:
-  - linux
-
-julia:
-  - 1.5
+notifications:
+  email: false
 
 codecov: true
 
 env:
   - CODECOV_TOKEN="7b1544eb-1469-49bd-8b22-0db499b444ed"
 
-script:
-  - julia -e 'using Pkg; Pkg.activate("."); Pkg.test(coverage=true)'
-
-after_success:
-  - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
-
 jobs:
   include:
+    - stage: "Testing"
+      julia:
+        - 1.5
+        - 1.0
+        - nightly
+      os:
+        - linux
+      script:
+        - julia -e 'using Pkg; Pkg.activate("."); Pkg.test(coverage=true)'
+      after_success:
+        - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
     - stage: "Documentation"
       julia: 1.5
       os: linux
