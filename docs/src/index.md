@@ -13,15 +13,19 @@ $ julia
 ```
 
 Next, activate the package:
-```jldoctest greet
-julia> using Pkg; Pkg.activate("."); using ProspectorML
+```julia
+julia> cd("/path/to/ProspectorML.jl")
+julia> using Pkg; Pkg.activate("."); using ProspectorML;
+```
+
+```@meta greet
+DocTestSetup = quote
+    using ProspectorML
+end
 ```
 
 Then you can run the one function it currently contains:
 ```jldoctest greet
 julia> ProspectorML.greet()
-
-# output
-
 Hello World!
 ```
