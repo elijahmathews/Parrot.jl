@@ -14,7 +14,6 @@ $ julia
 
 Next, activate the package:
 ```jldoctest greet
-julia> cd("/path/to/ProspectorML.jl")
 julia> using Pkg; Pkg.activate("."); using ProspectorML
 ```
 
