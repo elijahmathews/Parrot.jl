@@ -18,14 +18,8 @@ julia> cd("/path/to/ProspectorML.jl")
 julia> using Pkg; Pkg.activate("."); using ProspectorML;
 ```
 
-```@meta greet
-DocTestSetup = quote
-    using ProspectorML
-end
-```
-
 Then you can run the one function it currently contains:
-```jldoctest greet
+```jldoctest greet; setup = :(using ProspectorML)
 julia> ProspectorML.greet()
 Hello World!
 ```
