@@ -13,8 +13,8 @@ $ julia
 ```
 
 Next, activate the package:
-```@repl
-julia> cd("/path/to/ProspectorML.jl");
+```julia
+julia> cd("/path/to/ProspectorML.jl")
 julia> using Pkg; Pkg.activate("."); using ProspectorML;
 ```
 
