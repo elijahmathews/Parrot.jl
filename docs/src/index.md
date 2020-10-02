@@ -1,4 +1,5 @@
-# ProspectorML: A Neural Net Emulator for Prospector
+# ProspectorML.jl
+*A Neural Net Emulator for Prospector*
 
 ## Installation
 
