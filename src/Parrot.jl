@@ -1,4 +1,4 @@
-module ProspectorML
+module Parrot
 	
 	#
 	# Include source code files.

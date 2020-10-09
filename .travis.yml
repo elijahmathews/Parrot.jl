@@ -11,10 +11,7 @@ env:
 jobs:
   include:
     - stage: "Testing"
-      julia:
-        - 1.5
-        - 1.0
-        - nightly
+      julia: 1.5
       os:
         - linux
       script:

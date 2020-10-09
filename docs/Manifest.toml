@@ -50,6 +50,11 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
+[[Parrot]]
+path = "/home/elijahmathews/Documents/Julia/Parrot"
+uuid = "639c8201-8a61-4ebb-ad4a-e16623478ddb"
+version = "0.1.0"
+
 [[Parsers]]
 deps = ["Dates", "Test"]
 git-tree-sha1 = "8077624b3c450b15c087944363606a6ba12f925e"

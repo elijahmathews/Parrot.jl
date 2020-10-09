@@ -1,8 +1,4 @@
-using Test, Documenter, ProspectorML
-
-@testset "Doctests" begin
-	doctest(ProspectorML)
-end
+using Test, Documenter, Parrot
 
 @testset "Hello World" begin
 	message = "Hello world!"

@@ -1,15 +1,18 @@
 push!(LOAD_PATH, "../src/")
 
-using Documenter, ProspectorML
+using Documenter, Parrot
 
 makedocs(
-    sitename = "ProspectorML.jl",
+    format = Documenter.HTML(
+        assets = ["assets/favicon.ico"],
+    ),
+    sitename = "Parrot",
     pages = [
         "Home" => "index.md"
-    ]
+    ],
 )
 
 deploydocs(
-    repo = "github.com/elijahmathews/ProspectorML.jl.git",
+    repo = "github.com/elijahmathews/Parrot.jl.git",
     devbranch = "primary",
 )

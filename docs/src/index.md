@@ -1,4 +1,4 @@
-# ProspectorML.jl
+# Parrot
 *A Neural Net Emulator for Prospector*
 
 ## Installation
@@ -8,19 +8,19 @@ First, please install Julia on your system by following the steps listed on the 
 Next, clone the repository and start a Julia shell within (once the repo is public, this will be possible to do from within Julia itself):
 
 ```bash
-$ git clone git@github.com:elijahmathews/ProspectorML.jl.git
-$ cd ProspectorML.jl
+$ git clone git@github.com:elijahmathews/Parrot.jl.git
+$ cd Parrot.jl
 $ julia
 ```
 
 Next, activate the package:
 ```julia
-julia> cd("/path/to/ProspectorML.jl")
-julia> using Pkg; Pkg.activate("."); using ProspectorML;
+julia> cd("/path/to/Parrot.jl")
+julia> using Pkg; Pkg.activate("."); using Parrot;
 ```
 
 Then you can run the one function it currently contains:
-```jldoctest greet; setup = :(using ProspectorML)
-julia> ProspectorML.greet()
+```jldoctest greet; setup = :(using Parrot)
+julia> Parrot.greet()
 Hello World!
 ```
