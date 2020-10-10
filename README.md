@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/23229627/95606648-3c30e280-0a20-11eb-89ab-349a177a2f14.png" alt="Parrot Banner" height="160"/>
+  <img src="https://user-images.githubusercontent.com/23229627/95641713-6bb80d00-0a69-11eb-80aa-48748c542f03.png" alt="Parrot Banner" height="160"/>
   <br />
   <a href="https://github.elijahmathews.com/Parrot.jl/dev/"><img src="https://img.shields.io/badge/docs-dev-blue.svg" alt="Documentation"/></a>
   <a href="https://travis-ci.com/elijahmathews/Parrot.jl"><img src="https://travis-ci.com/elijahmathews/Parrot.jl.svg?token=jqsZfzX8nuWUyxGHcwEq&branch=primary" alt="Build Status"/></a>
