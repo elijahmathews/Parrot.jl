@@ -12,8 +12,8 @@ struct Alsing{S<:AbstractArray,T<:AbstractArray}
 end
 
 function Alsing(in::Integer, out::Integer;
-		initW = Flux.glorot_uniform, initb = zeros,
-		initβ = Flux.glorot_uniform, initγ = Flux.glorot_uniform)
+                initW = Flux.glorot_uniform, initb = zeros,
+                initβ = Flux.glorot_uniform, initγ = Flux.glorot_uniform)
     return Alsing(initW(out,in), initb(out), initβ(out,in), initγ(out,in))
 end
 
