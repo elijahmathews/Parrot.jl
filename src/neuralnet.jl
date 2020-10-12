@@ -21,6 +21,6 @@ Flux.@functor Alsing
 
 function (a::Alsing)(x::AbstractArray)
     W, b, β, γ = a.W, a.b, a.β, a.γ
-    (γ + σ.(β*x) * (1-γ)) * (W*x + b)
+    (γ .+ σ.(β * x) * (one(γ) - γ)) * (W*x .+ b)
 end
 
