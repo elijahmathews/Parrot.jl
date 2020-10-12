@@ -1,8 +1,9 @@
 module Parrot
-	
-	#
-	# Include source code files.
-	#
-	include("neuralnet.jl")
-	
+    
+    using Flux
+    #
+    # Include source code files.
+    #
+    include("neuralnet.jl")
+
 end # module
