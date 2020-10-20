@@ -1,6 +1,9 @@
 module Parrot
     
     using Flux
+    
+    export Alsing
+
     #
     # Include source code files.
     #
