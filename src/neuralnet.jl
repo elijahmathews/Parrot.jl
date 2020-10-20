@@ -1,26 +1,54 @@
 #
-# src/neuralnet.jl
+# Parrot.jl/src/neuralnet.jl
+#
+# By Elijah Mathews
 #
 
-greet() = print("Hello World!")
+"""
+    Alsing(in::Integer, out::Integer)
 
-struct Alsing{S<:AbstractArray,T<:AbstractArray,U<:AbstractArray}
+Create a non-linear `Alsing` layer with parameters `W`, `b`, `α`, and `β`.
+
+    y = (β .+ σ.(α .* (W*x .+ b)) .* (1 .- β)) .* (W*x .+ b)
+
+The input `x` must be a vector of length `in`, or a batch of vectors represented
+as an `in × N` matrix. The out `y` will be a vector or batch of length `out`.
+
+See arXiv:1911.11778 for more information.
+
+# Example
+```
+julia> a = Alsing(8,3)
+Alsing(8, 3)
+
+julia> a(rand(8))
+3-element Array{Float64,1}:
+  0.9555069887698046
+  0.14443222298921962
+ -0.06765412728860333
+```
+"""
+struct Alsing{S<:AbstractArray, T<:AbstractArray, U<:AbstractArray}
     W::S
     b::T
+    α::U
     β::U
-    γ::U
 end
 
 function Alsing(in::Integer, out::Integer;
                 initW = Flux.glorot_uniform, initb = zeros,
-                initβ = Flux.glorot_uniform, initγ = Flux.glorot_uniform)
-    return Alsing(initW(out,in), initb(out), initβ(out,out), initγ(out,out))
+                initα = Flux.glorot_uniform, initβ = Flux.glorot_uniform)
+    return Alsing(initW(out,in), initb(out), initα(out), initβ(out))
 end
 
 Flux.@functor Alsing
 
 function (a::Alsing)(x::AbstractArray)
-    W, b, β, γ = a.W, a.b, a.β, a.γ
-    (γ .+ σ.(β * (W*x .+ b)) .* (one(γ) - γ)) * (W*x .+ b)
+    W, b, α, β = a.W, a.b, a.α, a.β
+    (β .+ σ.(α .* (W*x .+ b)) .* (1 .- β)) .* (W*x .+ b)
+end
+
+function Base.show(io::IO, l::Alsing)
+    print(io, "Alsing(", size(l.W, 2), ", ", size(l.W, 1), ")")
 end
 
