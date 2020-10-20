@@ -14,7 +14,7 @@ Create a non-linear `Alsing` layer with parameters `W`, `b`, `α`, and `β`.
 The input `x` must be a vector of length `in`, or a batch of vectors represented
 as an `in × N` matrix. The out `y` will be a vector or batch of length `out`.
 
-See arXiv:1911.11778 for more information.
+See [arXiv:1911.11778](https://arxiv.org/abs/1911.11778) for more information.
 
 # Example
 ```
