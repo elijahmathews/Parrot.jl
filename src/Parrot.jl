@@ -10,7 +10,7 @@ module Parrot
     # 
     # State packages we're using.
     # 
-    using Flux
+    using Flux, Random, Statistics
     using BSON: @save, @load
     
     # 
@@ -23,6 +23,7 @@ module Parrot
     #
     include("neuralnet.jl")
     include("generatedata.jl")
+    include("utils.jl")
 
 end
 
