@@ -53,3 +53,9 @@ function Base.show(io::IO, l::Alsing)
     print(io, "Alsing(", size(l.W, 2), ", ", size(l.W, 1), ")")
 end
 
+(a::Alsing{W})(x::AbstractArray{T}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
+    invoke(a, Tuple{AbstractArray}, x)
+
+(a::Alsing{W})(x::AbstractArray{<:AbstractFloat}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
+    a(T.(x))
+
