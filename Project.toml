@@ -4,5 +4,7 @@ authors = ["Elijah Mathews <me@elijahmathews.com>"]
 version = "0.1.0"
 
 [deps]
+BSON = "fbb218c0-5317-5bc6-957e-2ee96dd4b1f0"
 Flux = "587475ba-b771-5e3f-ad9e-33799f191a9c"
 MultivariateStats = "6f286f6a-111f-5878-ab1e-185364afe411"
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"

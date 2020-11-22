@@ -11,6 +11,7 @@ module Parrot
     # State packages we're using.
     # 
     using Flux
+    using BSON: @save, @load
     
     # 
     # Export really useful things from Parrot.
@@ -21,6 +22,7 @@ module Parrot
     # Include source code files.
     #
     include("neuralnet.jl")
+    include("generatedata.jl")
 
 end
 
