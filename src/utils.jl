@@ -42,19 +42,19 @@ function fractionalerrorquantiles(fractionalerror; quants=[0.0005, 0.005, 0.025,
     
     for i in 1:length(fractionalerror)
         
-        result = zeros(length(quants), size(fractionalerror[i], 2))
+        result = zeros(length(quants), size(fractionalerror[i], 1))
         
-        for j in 1:size(fractionalerror[i], 2)
+        for j in 1:size(fractionalerror[i], 1)
             
             for k in 1:length(quants)
                 
-                result[k,j] = quantile(fractionalerror[i][:,j], quants[k])
+                result[k,j] = quantile(fractionalerror[i][j,:], quants[k])
                 
             end
             
         end
         
-        push!(returnval, result)
+        push!(returnval: result)
         
     end
     
