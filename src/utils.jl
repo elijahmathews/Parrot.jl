@@ -58,7 +58,7 @@ function fractionalerrorquantiles(fractionalerror; quants=[0.0005, 0.005, 0.025,
     
 end
 
-function convert(MultivariateStats.PCA{Float32}, pca::MultivariateStats.PCA{Float64})
+function Base.convert(::Type{MultivariateStats.PCA{Float32}}, pca::MultivariateStats.PCA{Float64})
     MultivariateStats.PCA(
         convert(Array{Float32,1}, pca.mean    ),
         convert(Array{Float32,2}, pca.proj    ),

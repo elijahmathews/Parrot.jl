@@ -38,6 +38,7 @@ function Base.show(io::IO, l::Normalization)
     print(io, "Normalization(", l.μ, ", ", l.σ, ")")
 end
 
+
 """
     Alsing(in::Integer, out::Integer)
 
@@ -86,11 +87,13 @@ function Base.show(io::IO, l::Alsing)
     print(io, "Alsing(", size(l.W, 2), ", ", size(l.W, 1), ")")
 end
 
+# 
 # (a::Alsing{W})(x::AbstractArray{T}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
 #     invoke(a, Tuple{AbstractArray}, x)
 # 
 # (a::Alsing{W})(x::AbstractArray{<:AbstractFloat}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
 #     a(T.(x))
+#
 
 """
     ReconstructPCA(P::MultivariateStats.PCA{AbstractFloat})
@@ -101,8 +104,8 @@ Create a `ReconstructPCA` layer given a PCA object `P`.
 
 The input `x` must have dimensions compatible with `P`. No parameters are trainable.
 """
-struct ReconstructPCA{S<:MultivariateStats.PCA{AbstractFloat}}
-    P::S
+struct ReconstructPCA{S<:AbstractFloat}
+    P::MultivariateStats.PCA{S}
 end
 
 function ReconstructPCA(P::MultivariateStats.PCA{AbstractFloat})
@@ -122,6 +125,7 @@ end
 function Base.show(io::IO, l::ReconstructPCA)
     print(io, "ReconstructPCA(", l.P, ")")
 end
+
 
 """
     Denormalization(μ::AbstractArray, σ::AbstractArray)    

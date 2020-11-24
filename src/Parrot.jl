@@ -13,7 +13,7 @@ module Parrot
     using Flux
     using MultivariateStats
     using Random, Statistics
-    using BSON: @save, @load
+    # using BSON: @save, @load
     
     # 
     # Export really useful things from Parrot.
