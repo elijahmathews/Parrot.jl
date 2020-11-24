@@ -6,6 +6,39 @@
 # 
 
 """
+    Normalization(μ::AbstractArray, σ::AbstractArray)    
+
+Create a simple `Normalization` layer with parameters `μ` and `σ`.
+
+    y = (x .- μ) ./ σ
+
+The input `x` must be a vector of equal length to both `μ` and `σ`.
+No parameters are trainable.
+"""
+struct Normalization{S<:AbstractArray}
+    μ::S
+    σ::S
+end
+
+function Normalization(μ::AbstractArray, σ::AbstractArray)
+    return Normalization(μ, σ)
+end
+
+Flux.@functor Normalization
+
+Flux.trainable(n::Normalization) = (,)
+
+
+function (n::Normalization)(x::AbstractArray)
+    μ, σ = n.μ, n.σ
+    (x .- μ) ./ σ
+end
+
+function Base.show(io::IO, l::Normalization)
+    print(io, "Normalization(", l.μ, ", ", l.σ, ")")
+end
+
+"""
     Alsing(in::Integer, out::Integer)
 
 Create a non-linear `Alsing` layer with parameters `W`, `b`, `α`, and `β`.
@@ -53,9 +86,72 @@ function Base.show(io::IO, l::Alsing)
     print(io, "Alsing(", size(l.W, 2), ", ", size(l.W, 1), ")")
 end
 
-(a::Alsing{W})(x::AbstractArray{T}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
-    invoke(a, Tuple{AbstractArray}, x)
+# (a::Alsing{W})(x::AbstractArray{T}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
+#     invoke(a, Tuple{AbstractArray}, x)
+# 
+# (a::Alsing{W})(x::AbstractArray{<:AbstractFloat}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
+#     a(T.(x))
 
-(a::Alsing{W})(x::AbstractArray{<:AbstractFloat}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
-    a(T.(x))
+"""
+    ReconstructPCA(P::MultivariateStats.PCA{AbstractFloat})
+
+Create a `ReconstructPCA` layer given a PCA object `P`.
+
+    y = MultivariateStats.reconstruct(P, x)
+
+The input `x` must have dimensions compatible with `P`. No parameters are trainable.
+"""
+struct ReconstructPCA{S<:MultivariateStats.PCA{AbstractFloat}}
+    P::S
+end
+
+function ReconstructPCA(P::MultivariateStats.PCA{AbstractFloat})
+    return ReconstructPCA(P)
+end
+
+Flux.@functor ReconstructPCA
+
+Flux.trainable(r::ReconstructPCA) = (,)
+
+function (r::ReconstructPCA)(x::AbstractArray)
+    P = r.P
+    MultivariateStats.reconstruct(P,x)
+    # permutedims(MultivariateStats.reconstruct(P,permutedims(x)))
+end
+
+function Base.show(io::IO, l::ReconstructPCA)
+    print(io, "ReconstructPCA(", l.P, ")")
+end
+
+"""
+    Denormalization(μ::AbstractArray, σ::AbstractArray)    
+
+Create a simple `Denormalization` layer with parameters `μ` and `σ`.
+
+    y = (σ .* x) .+ μ
+
+The input `x` must be a vector of equal length to both `μ` and `σ`.
+No parameters are trainable.
+"""
+struct Denormalization{S<:AbstractArray}
+    μ::S
+    σ::S
+end
+
+function Denormalization(μ::AbstractArray, σ::AbstractArray)
+    return Denormalization(μ, σ)
+end
+
+Flux.@functor Denormalization
+
+Flux.trainable(d::Denormalization) = (,)
+
+function (d::Denormalization)(x::AbstractArray)
+    μ, σ = d.μ, d.σ
+    (σ .* x) .+ μ
+end
+
+function Base.show(io::IO, l::Denormalization)
+    print(io, "Denormalization(", l.μ, ", ", l.σ, ")")
+end
 

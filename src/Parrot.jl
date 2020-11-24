@@ -10,13 +10,15 @@ module Parrot
     # 
     # State packages we're using.
     # 
-    using Flux, Random, Statistics
+    using Flux: trainable, @functor, glorot_uniform
+    using MultivariateStats: PCA, reconstruct
+    using Random, Statistics
     using BSON: @save, @load
     
     # 
     # Export really useful things from Parrot.
     # 
-    export Alsing
+    export Normalization, Alsing, ReconstructPCA, Denormalization, convert
 
     #
     # Include source code files.
