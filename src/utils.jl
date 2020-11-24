@@ -54,7 +54,7 @@ function fractionalerrorquantiles(fractionalerror; quants=[0.0005, 0.005, 0.025,
             
         end
         
-        push!(returnval: result)
+        push!(returnval, result)
         
     end
     
