@@ -26,7 +26,7 @@ end
 
 Flux.@functor Normalization
 
-Flux.trainable(n::Normalization) = (,)
+Flux.trainable(n::Normalization) = ()
 
 
 function (n::Normalization)(x::AbstractArray)
@@ -111,7 +111,7 @@ end
 
 Flux.@functor ReconstructPCA
 
-Flux.trainable(r::ReconstructPCA) = (,)
+Flux.trainable(r::ReconstructPCA) = ()
 
 function (r::ReconstructPCA)(x::AbstractArray)
     P = r.P
@@ -144,7 +144,7 @@ end
 
 Flux.@functor Denormalization
 
-Flux.trainable(d::Denormalization) = (,)
+Flux.trainable(d::Denormalization) = ()
 
 function (d::Denormalization)(x::AbstractArray)
     μ, σ = d.μ, d.σ
