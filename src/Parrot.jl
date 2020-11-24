@@ -10,8 +10,8 @@ module Parrot
     # 
     # State packages we're using.
     # 
-    using Flux: trainable, @functor, glorot_uniform
-    using MultivariateStats: PCA, reconstruct
+    using Flux
+    using MultivariateStats
     using Random, Statistics
     using BSON: @save, @load
     
