@@ -6,25 +6,29 @@
 # 
 
 """
-    trainvalidindices(validfrac, N::Integer)
+    splitindices(frac::Real, N::Integer)
 
-Generate sets of training and validation indices for datasets of length `N`.
+Generate two sets of unique indices of cumulative length `N`.
 Returns a tuple:
 
-    (validindex, trainindex)
+    (indices1, indices2)
 
-where `validindex` is an array of unique indices of length `validfrac × N` and
-`trainindex` is an array of unique indices of length `(1 - validfrac) × N`.
+where `indices1` is an array of unique indices of length `frac × N` and
+`indices2` is an array of unique indices of length `(1 - frac) × N`. Can
+be used for generating indices to separate training and test datasets, for
+example.
 """
-function trainvalidindices(validfrac, N::Integer)
+function splitindices(frac, N::Integer)
+
+    @assert 0 <= frac <= 1
     
     # Generate unique random indices.
     base = randperm(N)
     
-    validindex = base[1:ceil(Int, validfrac * N)]
-    trainindex = base[(ceil(Int,validfrac * N) + 1):end]
+    indices1 = base[1:ceil(Int, frac * N)]
+    indices2 = base[(ceil(Int, frac * N) + 1):end]
     
-    return validindex, trainindex
+    return indices1, indices2
     
 end
 
@@ -32,7 +36,7 @@ end
     fractionalerrorquantiles(...)
 
 """
-function fractionalerrorquantiles(fractionalerror; quants=[0.0005, 0.005, 0.025, 0.5, 0.975, 0.99, 0.999])
+function fractionalerrorquantiles(fractionalerror; quants=[0.0005, 0.005, 0.025, 0.5, 0.975, 0.995, 0.9995])
     
     returnval = []
     
