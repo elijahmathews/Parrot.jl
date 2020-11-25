@@ -8,12 +8,14 @@
 """
     Normalization(μ::AbstractArray, σ::AbstractArray)    
 
-Create a simple `Normalization` layer with parameters `μ` and `σ`.
+Create a simple `Normalization` layer with parameters consisting of
+some previously known mean `μ` and standard deviation `σ`.
 
     y = (x .- μ) ./ σ
 
-The input `x` must be a vector of equal length to both `μ` and `σ`.
-No parameters are trainable.
+The input `x` must be a vector of equal length to both `μ` and `σ` or
+an array with dimensions such that the broadcasted functions can be used
+with the given `μ` and `σ`. No parameters are trainable.
 """
 struct Normalization{S<:AbstractArray}
     μ::S
@@ -42,14 +44,18 @@ end
 """
     Alsing(in::Integer, out::Integer)
 
-Create a non-linear `Alsing` layer with parameters `W`, `b`, `α`, and `β`.
+Create a non-linear `Alsing` layer with trainable parameters `W`, `b`,
+`α`, and `β`.
 
     y = (β .+ σ.(α .* (W*x .+ b)) .* (1 .- β)) .* (W*x .+ b)
 
-The input `x` must be a vector of length `in`, or a batch of vectors represented
-as an `in × N` matrix. The out `y` will be a vector or batch of length `out`.
+The input `x` must be a vector of length `in`, or a batch of vectors
+represented as an `in × N` matrix. The out `y` will be a vector or batch
+of length `out`.
 
-See [arXiv:1911.11778](https://arxiv.org/abs/1911.11778) for more information.
+See [arXiv:1911.11778](https://arxiv.org/abs/1911.11778) for more information
+about this activation function. Intended to be used for emulating stellar
+population synthesis codes.
 
 # Example
 ```
@@ -98,11 +104,14 @@ end
 """
     ReconstructPCA(P::MultivariateStats.PCA{AbstractFloat})
 
-Create a `ReconstructPCA` layer given a PCA object `P`.
+Create a `ReconstructPCA` layer that uses Principal Component analysis to
+reconstruct its input using a given MutlivariateStats.PCA object `P`.
 
     y = MultivariateStats.reconstruct(P, x)
 
-The input `x` must have dimensions compatible with `P`. No parameters are trainable.
+The input `x` must have dimensions compatible with `P` and the layer's output
+will be of the dimensions given by the PCA reconstruction. No parameters are
+trainable.
 """
 struct ReconstructPCA{S<:AbstractFloat}
     P::MultivariateStats.PCA{S}
@@ -119,7 +128,6 @@ Flux.trainable(r::ReconstructPCA) = ()
 function (r::ReconstructPCA)(x::AbstractArray)
     P = r.P
     MultivariateStats.reconstruct(P,x)
-    # permutedims(MultivariateStats.reconstruct(P,permutedims(x)))
 end
 
 function Base.show(io::IO, l::ReconstructPCA)
@@ -130,12 +138,14 @@ end
 """
     Denormalization(μ::AbstractArray, σ::AbstractArray)    
 
-Create a simple `Denormalization` layer with parameters `μ` and `σ`.
+Create a simple `Denormalization` layer with parameters consisting of
+some previously known mean `μ` and standard deviation `σ`.
 
     y = (σ .* x) .+ μ
 
-The input `x` must be a vector of equal length to both `μ` and `σ`.
-No parameters are trainable.
+The input `x` must be a vector of equal length to both `μ` and `σ` or
+an array with dimensions such that the broadcasted functions can be used
+with the given `μ` and `σ`. No parameters are trainable.
 """
 struct Denormalization{S<:AbstractArray}
     μ::S
