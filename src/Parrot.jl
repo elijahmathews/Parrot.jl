@@ -13,7 +13,6 @@ module Parrot
     using Flux
     using MultivariateStats
     using Random, Statistics
-    # using BSON: @save, @load
     
     # 
     # Export really useful things from Parrot.
@@ -23,8 +22,8 @@ module Parrot
     #
     # Include source code files.
     #
-    include("neuralnet.jl")
-    include("generatedata.jl")
+    include("layers.jl")
+    include("prospect.jl")
     include("utils.jl")
 
 end
