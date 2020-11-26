@@ -1,5 +1,5 @@
 # 
-# Parrot.jl/src/neuralnet.jl
+# Parrot.jl/src/layers.jl
 # 
 # By Elijah Mathews (me@elijahmathews.com)
 # openpgp4fpr:ac1d3fb1e8a5eb7d14bd587b2932c725055a90d8
