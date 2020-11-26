@@ -1,5 +1,5 @@
 # Parrot
-*A neural network framework for emulating stellar population synthesis. Written in Julia.*
+*A neural network framework for emulating stellar population synthesis. Written in [Julia](https://julialang.org).*
 
 ## Installation
 
@@ -8,7 +8,7 @@ First, please install Julia on your system by following the steps listed on the 
 To install Parrot, open a Julia REPL and type `]` (to enter the Pkg REPL) followed by:
 
 ```
-add https://github.com/elijahmathews/Parrot.jl.git
+(@v1.5) pkg> add https://github.com/elijahmathews/Parrot.jl.git
 ```
 
 Or alternatively, run the following code directly at the Julia REPL:
@@ -21,3 +21,9 @@ julia> import Pkg; Pkg.add(url="https://github.com/elijahmathews/Parrot.jl.git")
 
 At the moment, Parrot is in development, but the intent is to create a package that will aid in emulating stellar population synthesis (SPS) codes using neural networks. The package is currently being designed under the [Flux](https://github.com/FluxML/Flux.jl) machine learning ecosystem.
 
+```@docs
+Alsing
+ReconstructPCA
+Normalization
+Denormalization
+```
