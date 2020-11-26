@@ -10,4 +10,4 @@
 ] add https://github.com/elijahmathews/Parrot.jl
 ```
 
-A neural net emulator for the [Prospector](https://github.com/bd-j/prospector) stellar population inference code. Written in [Julia](https://julialang.org/).
+A neural network framework for emulating stellar population synthesis. Written in [Julia](https://julialang.org/).

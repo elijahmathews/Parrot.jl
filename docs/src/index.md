@@ -1,26 +1,23 @@
 # Parrot
-*A Neural Net Emulator for Prospector*
+*A neural network framework for emulating stellar population synthesis. Written in Julia.*
 
 ## Installation
 
 First, please install Julia on your system by following the steps listed on the [Julia website](https://julialang.org/downloads/). This package is currently being developed and tested on Julia v1.5, but it will likely work with earlier versions as well.
 
-Next, clone the repository and start a Julia shell within (once the repo is public, this will be possible to do from within Julia itself):
+To install Parrot, open a Julia REPL and type `]` (to enter the Pkg REPL) followed by:
 
-```bash
-$ git clone git@github.com:elijahmathews/Parrot.jl.git
-$ cd Parrot.jl
-$ julia
+```
+add https://github.com/elijahmathews/Parrot.jl.git
 ```
 
-Next, activate the package:
+Or alternatively, run the following code directly at the Julia REPL:
+
 ```julia
-julia> cd("/path/to/Parrot.jl")
-julia> using Pkg; Pkg.activate("."); using Parrot;
+julia> import Pkg; Pkg.add(url="https://github.com/elijahmathews/Parrot.jl.git")
 ```
 
-Then you can run the one function it currently contains:
-```jldoctest greet; setup = :(using Parrot)
-julia> Parrot.greet()
-Hello World!
-```
+## Overview
+
+At the moment, Parrot is in development, but the intent is to create a package that will aid in emulating stellar population synthesis (SPS) codes using neural networks. The package is currently being designed under the [Flux](https://github.com/FluxML/Flux.jl) machine learning ecosystem.
+
