@@ -134,7 +134,7 @@ function generatedata(amount::Integer)
         θ = params[i,:]
 
         # Generate the spectrum and other stuff.
-        spec, phot, mfrac = model.sed(θ; obs = obs, sps = sps)
+	spec, _, _ = model.sed(θ; obs = obs, sps = sps)
 
         # Take log10(...) of the spetrum.
         Iarray[i,:] = log10.(spec)
