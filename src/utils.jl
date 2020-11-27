@@ -1,9 +1,9 @@
-# 
+#
 # Parrot.jl/src/utils.jl
-# 
+#
 # By Elijah Mathews (me@elijahmathews.com)
 # openpgp4fpr:ac1d3fb1e8a5eb7d14bd587b2932c725055a90d8
-# 
+#
 
 """
     splitindices(frac::Real, N::Integer)
@@ -21,15 +21,15 @@ example.
 function splitindices(frac, N::Integer)
 
     @assert 0 <= frac <= 1
-    
+
     # Generate unique random indices.
     base = randperm(N)
-    
+
     indices1 = base[1:ceil(Int, frac * N)]
     indices2 = base[(ceil(Int, frac * N) + 1):end]
-    
+
     return indices1, indices2
-    
+
 end
 
 """
@@ -37,29 +37,29 @@ end
 
 """
 function fractionalerrorquantiles(fractionalerror; quants=[0.0005, 0.005, 0.025, 0.5, 0.975, 0.995, 0.9995])
-    
+
     returnval = []
-    
+
     for i in 1:length(fractionalerror)
-        
+
         result = zeros(length(quants), size(fractionalerror[i], 1))
-        
+
         for j in 1:size(fractionalerror[i], 1)
-            
+
             for k in 1:length(quants)
-                
+
                 result[k,j] = quantile(fractionalerror[i][j,:], quants[k])
-                
+
             end
-            
+
         end
-        
+
         push!(returnval, result)
-        
+
     end
-    
+
     return returnval
-    
+
 end
 
 function Base.convert(::Type{MultivariateStats.PCA{Float32}}, pca::MultivariateStats.PCA{Float64})

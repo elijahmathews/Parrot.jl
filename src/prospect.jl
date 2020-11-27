@@ -1,4 +1,4 @@
-# 
+#
 # Parrot.jl/src/prospect.jl
 #
 # By Elijah Mathews (me@elijahmathews.com)
@@ -14,7 +14,7 @@ Generate a observation dictionary for the purposes of generating
 training and validation data from Prospector.
 """
 function buildobs(; snr=10, ldist=10, extras...)
-    
+
     # The obs dictionary, empty for now.
     obs = Dict()
 
@@ -49,9 +49,9 @@ function buildmodel(; object_redshift = nothing, ldist=10, fixed_metallicity = n
     py"""
 
     from prospect.models.templates import TemplateLibrary
-    
+
     def get_template_library(key):
-        
+
         return TemplateLibrary[key]
 
     """
@@ -83,7 +83,7 @@ Generate a CSPSpecBasis object for the purposes of generating training
 and validation data from Prospector.
 """
 function buildsps(; zcontinuous = 1, extras...)
-    
+
     sources = pyimport("prospect.sources")
 
     sps = sources.CSPSpecBasis(; zcontinuous=zcontinuous, extras...)
@@ -119,7 +119,7 @@ function generatedata(amount::Integer)
     λarray = sps.wavelengths
 
     # Initialize output arrays.
-    Iarray = zeros(amount, length(λarray))
+    farray = zeros(amount, length(λarray))
     params = zeros(amount, 3)
 
     # Loop to generate data.
@@ -134,13 +134,13 @@ function generatedata(amount::Integer)
         θ = params[i,:]
 
         # Generate the spectrum and other stuff.
-	spec, _, _ = model.sed(θ; obs = obs, sps = sps)
+        spec, _, _ = model.sed(θ; obs = obs, sps = sps)
 
         # Take log10(...) of the spetrum.
-        Iarray[i,:] = log10.(spec)
+        farray[i,:] = log10.(spec)
 
     end
 
-    return λarray, params, Iarray
+    return λarray, params, farray
 
 end

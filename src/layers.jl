@@ -1,12 +1,12 @@
-# 
+#
 # Parrot.jl/src/layers.jl
-# 
+#
 # By Elijah Mathews (me@elijahmathews.com)
 # openpgp4fpr:ac1d3fb1e8a5eb7d14bd587b2932c725055a90d8
-# 
+#
 
 """
-    Normalization(μ::AbstractArray, σ::AbstractArray)    
+    Normalization(μ::AbstractArray, σ::AbstractArray)
 
 Create a simple `Normalization` layer with parameters consisting of
 some previously known mean `μ` and standard deviation `σ`.
@@ -39,7 +39,6 @@ end
 function Base.show(io::IO, l::Normalization)
     print(io, "Normalization(", l.μ, ", ", l.σ, ")")
 end
-
 
 """
     Alsing(in::Integer, out::Integer)
@@ -93,13 +92,13 @@ function Base.show(io::IO, l::Alsing)
     print(io, "Alsing(", size(l.W, 2), ", ", size(l.W, 1), ")")
 end
 
-# 
+#
 # (a::Alsing{W})(x::AbstractArray{T}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
 #     invoke(a, Tuple{AbstractArray}, x)
-# 
+#
 # (a::Alsing{W})(x::AbstractArray{<:AbstractFloat}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
 #     a(T.(x))
-# 
+#
 
 """
     ReconstructPCA(P::MultivariateStats.PCA{AbstractFloat})
@@ -136,7 +135,7 @@ end
 
 
 """
-    Denormalization(μ::AbstractArray, σ::AbstractArray)    
+    Denormalization(μ::AbstractArray, σ::AbstractArray)
 
 Create a simple `Denormalization` layer with parameters consisting of
 some previously known mean `μ` and standard deviation `σ`.
