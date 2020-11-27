@@ -68,11 +68,11 @@ julia> a(rand(8))
  -0.06765412728860333
 ```
 """
-struct Alsing{S<:AbstractArray, T<:AbstractArray, U<:AbstractArray}
+struct Alsing{S<:AbstractArray, T<:AbstractArray}
     W::S
     b::T
-    α::U
-    β::U
+    α::T
+    β::T
 end
 
 function Alsing(in::Integer, out::Integer;
