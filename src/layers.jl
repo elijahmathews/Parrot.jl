@@ -93,12 +93,17 @@ function Base.show(io::IO, l::Alsing)
 end
 
 #
-# (a::Alsing{W})(x::AbstractArray{T}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
-#     invoke(a, Tuple{AbstractArray}, x)
+# This next bit of code is an optimization inspired by what Flux does for its
+# Dense layer. While it's not entirely clear to me what this is doing, it
+# apparently tells Julia to avoid generic matmul and instead hit more optimized
+# matmul instead. I've also noticed this seems to force Float32 a bit more? Not
+# a bad thing.
 #
-# (a::Alsing{W})(x::AbstractArray{<:AbstractFloat}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
-#     a(T.(x))
-#
+(a::Alsing{W})(x::AbstractArray{T}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
+    invoke(a, Tuple{AbstractArray}, x)
+
+(a::Alsing{W})(x::AbstractArray{<:AbstractFloat}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
+    a(T.(x))
 
 """
     ReconstructPCA(P::MultivariateStats.PCA{AbstractFloat})

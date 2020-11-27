@@ -10,9 +10,7 @@ module Parrot
     #
     # State packages we're using.
     #
-    using Flux
-    using MultivariateStats
-    using Random, Statistics
+    using Flux, MultivariateStats, Random, Statistics
 
     #
     # Export really useful things from Parrot.
