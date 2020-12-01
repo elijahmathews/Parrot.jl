@@ -15,7 +15,7 @@ module Parrot
     #
     # Export really useful things from Parrot.
     #
-    export Normalization, Alsing, ReconstructPCA, Denormalization, convert
+    export Alsing, TransformPCA, ReconstructPCA, Normalization, Denormalization, convert
 
     #
     # Include source code files.
