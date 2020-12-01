@@ -23,6 +23,7 @@ At the moment, Parrot is in development, but the intent is to create a package t
 
 ```@docs
 Alsing
+TransformPCA
 ReconstructPCA
 Normalization
 Denormalization
