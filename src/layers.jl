@@ -6,41 +6,6 @@
 #
 
 """
-    Normalization(μ::AbstractArray, σ::AbstractArray)
-
-Create a simple `Normalization` layer with parameters consisting of
-some previously known mean `μ` and standard deviation `σ`.
-
-    y = (x .- μ) ./ σ
-
-The input `x` must be a vector of equal length to both `μ` and `σ` or
-an array with dimensions such that the broadcasted functions can be used
-with the given `μ` and `σ`. No parameters are trainable.
-"""
-struct Normalization{S<:AbstractArray}
-    μ::S
-    σ::S
-end
-
-function Normalization(μ::AbstractArray, σ::AbstractArray)
-    return Normalization(μ, σ)
-end
-
-Flux.@functor Normalization
-
-Flux.trainable(n::Normalization) = ()
-
-
-function (n::Normalization)(x::AbstractArray)
-    μ, σ = n.μ, n.σ
-    (x .- μ) ./ σ
-end
-
-function Base.show(io::IO, l::Normalization)
-    print(io, "Normalization(", l.μ, ", ", l.σ, ")")
-end
-
-"""
     Alsing(in::Integer, out::Integer)
 
 Create a non-linear `Alsing` layer with trainable parameters `W`, `b`,
@@ -105,17 +70,57 @@ end
 (a::Alsing{W})(x::AbstractArray{<:AbstractFloat}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
     a(T.(x))
 
+
+"""
+    TransformPCA(P::MultivariateStats.PCA{AbstractFloat})
+
+Create a `TransformPCA` layer that uses Principal Component Analysis (PCA)
+to transform its input into the PCA basis using a given MultivariateStats.PCA
+object `P`.
+
+    y = MultivariateStats.transform(P, x)
+
+The input `x` must have dimensions compatible with `P` and the layer's output
+will be of the dimensions given by the PCA transformation. No parameters are
+trainable.
+
+See also: [`MultivariateStats.PCA`](@ref), [`MultivariateStats.transform`](@ref)
+"""
+struct TransformPCA{S<:AbstractFloat}
+    P::MultivariateStats.PCA{S}
+end
+
+function TransformPCA(P::MultivariateStats.PCA{AbstractFloat})
+    return TransformPCA(P)
+end
+
+Flux.@functor TransformPCA
+
+Flux.trainable(t::TransformPCA) = ()
+
+function (t::TransformPCA)(x::AbstractArray)
+    P = t.P
+    MultivariateStats.transform(P,x)
+end
+
+function Base.show(io::IO, l::TransformPCA)
+    print(io, "TransformPCA(", l.P, ")")
+end
+
+
 """
     ReconstructPCA(P::MultivariateStats.PCA{AbstractFloat})
 
-Create a `ReconstructPCA` layer that uses Principal Component analysis to
-reconstruct its input using a given MutlivariateStats.PCA object `P`.
+Create a `ReconstructPCA` layer that uses Principal Component Analysis (PCA)
+to reconstruct its input using a given MultivariateStats.PCA object `P`.
 
     y = MultivariateStats.reconstruct(P, x)
 
 The input `x` must have dimensions compatible with `P` and the layer's output
 will be of the dimensions given by the PCA reconstruction. No parameters are
 trainable.
+
+See also: [`MultivariateStats.PCA`](@ref), [`MultivariateStats.reconstruct`](@ref)
 """
 struct ReconstructPCA{S<:AbstractFloat}
     P::MultivariateStats.PCA{S}
@@ -140,10 +145,48 @@ end
 
 
 """
+    Normalization(μ::AbstractArray, σ::AbstractArray)
+
+Create a simple `Normalization` layer with parameters consisting of
+some previously known mean `μ` and standard deviation `σ` that are used
+to normalize its input.
+
+    y = (x .- μ) ./ σ
+
+The input `x` must be a vector of equal length to both `μ` and `σ` or
+an array with dimensions such that the broadcasted functions can be used
+with the given `μ` and `σ`. No parameters are trainable.
+"""
+struct Normalization{S<:AbstractArray}
+    μ::S
+    σ::S
+end
+
+function Normalization(μ::AbstractArray, σ::AbstractArray)
+    return Normalization(μ, σ)
+end
+
+Flux.@functor Normalization
+
+Flux.trainable(n::Normalization) = ()
+
+
+function (n::Normalization)(x::AbstractArray)
+    μ, σ = n.μ, n.σ
+    (x .- μ) ./ σ
+end
+
+function Base.show(io::IO, l::Normalization)
+    print(io, "Normalization(", l.μ, ", ", l.σ, ")")
+end
+
+
+"""
     Denormalization(μ::AbstractArray, σ::AbstractArray)
 
 Create a simple `Denormalization` layer with parameters consisting of
-some previously known mean `μ` and standard deviation `σ`.
+some previously known mean `μ` and standard deviation `σ` that are used
+to restore its input from a normalized state.
 
     y = (σ .* x) .+ μ
 
