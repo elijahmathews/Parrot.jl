@@ -145,9 +145,9 @@ end
 
 
 """
-    Normalization(μ::AbstractArray, σ::AbstractArray)
+    Normalize(μ::AbstractArray, σ::AbstractArray)
 
-Create a simple `Normalization` layer with parameters consisting of
+Create a simple `Normalize` layer with parameters consisting of
 some previously known mean `μ` and standard deviation `σ` that are used
 to normalize its input.
 
@@ -157,34 +157,33 @@ The input `x` must be a vector of equal length to both `μ` and `σ` or
 an array with dimensions such that the broadcasted functions can be used
 with the given `μ` and `σ`. No parameters are trainable.
 """
-struct Normalization{S<:AbstractArray}
+struct Normalize{S<:AbstractArray}
     μ::S
     σ::S
 end
 
-function Normalization(μ::AbstractArray, σ::AbstractArray)
-    return Normalization(μ, σ)
+function Normalize(μ::AbstractArray, σ::AbstractArray)
+    return Normalize(μ, σ)
 end
 
-Flux.@functor Normalization
+Flux.@functor Normalize
 
-Flux.trainable(n::Normalization) = ()
+Flux.trainable(n::Normalize) = ()
 
-
-function (n::Normalization)(x::AbstractArray)
+function (n::Normalize)(x::AbstractArray)
     μ, σ = n.μ, n.σ
     (x .- μ) ./ σ
 end
 
-function Base.show(io::IO, l::Normalization)
-    print(io, "Normalization(", l.μ, ", ", l.σ, ")")
+function Base.show(io::IO, l::Normalize)
+    print(io, "Normalize(", l.μ, ", ", l.σ, ")")
 end
 
 
 """
-    Denormalization(μ::AbstractArray, σ::AbstractArray)
+    Denormalize(μ::AbstractArray, σ::AbstractArray)
 
-Create a simple `Denormalization` layer with parameters consisting of
+Create a simple `Denormalize` layer with parameters consisting of
 some previously known mean `μ` and standard deviation `σ` that are used
 to restore its input from a normalized state.
 
@@ -194,25 +193,25 @@ The input `x` must be a vector of equal length to both `μ` and `σ` or
 an array with dimensions such that the broadcasted functions can be used
 with the given `μ` and `σ`. No parameters are trainable.
 """
-struct Denormalization{S<:AbstractArray}
+struct Denormalize{S<:AbstractArray}
     μ::S
     σ::S
 end
 
-function Denormalization(μ::AbstractArray, σ::AbstractArray)
-    return Denormalization(μ, σ)
+function Denormalize(μ::AbstractArray, σ::AbstractArray)
+    return Denormalize(μ, σ)
 end
 
-Flux.@functor Denormalization
+Flux.@functor Denormalize
 
-Flux.trainable(d::Denormalization) = ()
+Flux.trainable(d::Denormalize) = ()
 
-function (d::Denormalization)(x::AbstractArray)
+function (d::Denormalize)(x::AbstractArray)
     μ, σ = d.μ, d.σ
     (σ .* x) .+ μ
 end
 
-function Base.show(io::IO, l::Denormalization)
-    print(io, "Denormalization(", l.μ, ", ", l.σ, ")")
+function Base.show(io::IO, l::Denormalize)
+    print(io, "Denormalize(", l.μ, ", ", l.σ, ")")
 end
 
