@@ -3,7 +3,7 @@
 
 ## Installation
 
-First, please install Julia on your system by following the steps listed on the [Julia website](https://julialang.org/downloads/). This package is currently being developed and tested on Julia v1.5, but it will likely work with earlier versions as well.
+First, please install Julia on your system by following the steps listed on the [Julia website](https://julialang.org/downloads/). This package is currently being developed and tested on Julia v1.5.
 
 To install Parrot, open a Julia REPL and type `]` (to enter the Pkg REPL) followed by:
 
@@ -25,6 +25,6 @@ At the moment, Parrot is in development, but the intent is to create a package t
 Alsing
 TransformPCA
 ReconstructPCA
-Normalization
-Denormalization
+Normalize
+Denormalize
 ```
