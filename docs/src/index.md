@@ -19,7 +19,7 @@ julia> import Pkg; Pkg.add(url="https://github.com/elijahmathews/Parrot.jl.git")
 
 ## Overview
 
-At the moment, Parrot is in development, but the intent is to create a package that will aid in emulating stellar population synthesis (SPS) codes using neural networks. The package is currently being designed under the [Flux](https://github.com/FluxML/Flux.jl) machine learning ecosystem.
+At the moment, Parrot is in development, but the intent is to create a package that will aid in emulating stellar population synthesis (SPS) codes efficiently using neural networks. The package is currently being designed under the [Flux](https://github.com/FluxML/Flux.jl) machine learning ecosystem, and may be combined with [Turing](https://github.com/TuringLang/Turing.jl) probabilistic programming library for SED inference.
 
 ```@docs
 Alsing

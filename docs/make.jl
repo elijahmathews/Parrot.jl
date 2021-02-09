@@ -15,7 +15,7 @@ makedocs(
     ),
     sitename = "Parrot",
     pages = [
-        "Home" => "index.md"
+        "Home" => "index.md",
     ],
 )
 
