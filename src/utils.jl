@@ -33,8 +33,14 @@ function splitindices(frac, N::Integer)
 end
 
 """
-    fractionalerrorquantiles(...)
+    fractionalerrorquantiles(fractionalerror; quants=[0.0005, 0.005, 0.025, 0.5, 0.975, 0.995, 0.9995])
 
+Compute the 0.05%, 0.5%, 2.5%, 50% (median), 97.5%, 99.5%, and 99.95% quantiles
+for a set of spectral energy distributions (SEDs) predicted by Parrot given an
+array of the fractional errors `fractionalerror`.
+
+The selected quantiles can be changed from their defaults by passing an array to
+the `quants` keyword argument.
 """
 function fractionalerrorquantiles(fractionalerror; quants=[0.0005, 0.005, 0.025, 0.5, 0.975, 0.995, 0.9995])
 
@@ -62,6 +68,11 @@ function fractionalerrorquantiles(fractionalerror; quants=[0.0005, 0.005, 0.025,
 
 end
 
+"""
+    convert(MultivariateStats.PCA{Float32}, pca::MultivariateStats.PCA{Float64})
+
+Convert a `Float64` PCA model `pca` to a `Float32` PCA model.
+"""
 function Base.convert(::Type{MultivariateStats.PCA{Float32}}, pca::MultivariateStats.PCA{Float64})
     MultivariateStats.PCA(
         convert(Array{Float32,1}, pca.mean    ),
