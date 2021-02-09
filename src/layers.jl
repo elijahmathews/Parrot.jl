@@ -17,9 +17,9 @@ The input `x` must be a vector of length `in`, or a batch of vectors
 represented as an `in × N` matrix. The out `y` will be a vector or batch
 of length `out`.
 
-See [arXiv:1911.11778](https://arxiv.org/abs/1911.11778) for more information
-about this activation function. Intended to be used for emulating stellar
-population synthesis codes.
+See [doi:10.3847/1538-4365/ab917f](https://doi.org/10.3847/1538-4365/ab917f)
+for more information about this activation function. Intended to be used for
+emulating stellar population synthesis codes.
 
 # Example
 ```

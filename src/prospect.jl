@@ -11,7 +11,7 @@ using PyCall
     buildobs(...)
 
 Generate a observation dictionary for the purposes of generating
-training and validation data from Prospector.
+training and validation data from [Prospector](https://github.com/bd-j/prospector).
 """
 function buildobs(; snr=10, ldist=10, extras...)
 
@@ -37,8 +37,8 @@ end
 """
     buildmodel(...)
 
-Generate an SedModel object from Prospector for the purposes of
-generating training and validation data.
+Generate an SedModel object from [Prospector](https://github.com/bd-j/prospector)
+for the purposes of generating training and validation data.
 """
 function buildmodel(; object_redshift = nothing, ldist=10, fixed_metallicity = nothing, add_duste = false, extras...)
 
@@ -80,7 +80,7 @@ end
     buildsps(...)
 
 Generate a CSPSpecBasis object for the purposes of generating training
-and validation data from Prospector.
+and validation data from [Prospector](https://github.com/bd-j/prospector).
 """
 function buildsps(; zcontinuous = 1, extras...)
 
@@ -95,8 +95,8 @@ end
 """
     generatedata(amount::Integer)
 
-Generate training and validation data from Prospector (using FSPS). Returns
-a tuple:
+Generate training and validation data from [Prospector](https://github.com/bd-j/prospector)
+(using [FSPS](https://github.com/cconroy20/fsps)). Returns a tuple:
 
     (λarray, params, Iarray)
 
