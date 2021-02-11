@@ -50,7 +50,7 @@ Flux.@functor Alsing
 
 function (a::Alsing)(x::AbstractArray)
     W, b, α, β = a.W, a.b, a.α, a.β
-    (β .+ Flux.σ.(α .* (W*x .+ b)) .* (Flux.ones(size(β)) .- β)) .* (W*x .+ b)
+    (β .+ Flux.σ.(α .* (W*x .+ b)) .* (1 .- β)) .* (W*x .+ b)
 end
 
 function Base.show(io::IO, l::Alsing)
