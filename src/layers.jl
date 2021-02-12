@@ -229,7 +229,7 @@ end
 
 Flux.@functor Denormalize
 
-Flux.trainabe(d::Denormalize) = ()
+Flux.trainable(d::Denormalize) = ()
 
 function (d::Denormalize)(x::AbstractArray)
     μ, σ = d.μ, d.σ
