@@ -69,16 +69,16 @@ end
 
 """
     TransformPCA(P::MultivariateStats.PCA{AbstractFloat})
+    TransformPCA(P::OnlineStats.CCIPCA)
 
 Create a `TransformPCA` layer that uses Principal Component Analysis (PCA)
-to transform its input into the PCA basis using a given MultivariateStats.PCA
-object `P`.
+to transform its input into the PCA basis using a given PCA object `P`.
 
 The input `x` must have dimensions compatible with `P` and the layer's output
 will be of the dimensions given by the PCA transformation. No parameters are
 trainable.
 
-See also: [`MultivariateStats.PCA`](@ref), [`MultivariateStats.transform`](@ref)
+See also: [`Flux.ReconstructPCA`](@ref)
 """
 struct TransformPCA{S<:AbstractArray, T<:AbstractArray}
     Pt::S
@@ -87,6 +87,10 @@ end
 
 function TransformPCA(P::MultivariateStats.PCA{S}) where {S<:AbstractFloat}
     return TransformPCA(permutedims(P.proj), P.mean)
+end
+
+function TransformPCA1(P::OnlineStats.CCIPCA)
+    return TransformPCA1(permutedims(P.U), P.center)
 end
 
 Flux.@functor TransformPCA
@@ -114,15 +118,16 @@ end
 
 """
     ReconstructPCA(P::MultivariateStats.PCA{AbstractFloat})
+    ReconstructPCA(P::OnlineStats.CCIPCA)
 
 Create a `ReconstructPCA` layer that uses Principal Component Analysis (PCA)
-to reconstruct its input using a given MultivariateStats.PCA object `P`.
+to reconstruct its input from the PCA basis using a given PCA object `P`.
 
 The input `x` must have dimensions compatible with `P` and the layer's output
 will be of the dimensions given by the PCA reconstruction. No parameters are
 trainable.
 
-See also: [`MultivariateStats.PCA`](@ref), [`MultivariateStats.reconstruct`](@ref)
+See also: [`Flux.TransformPCA`](@ref)
 """
 struct ReconstructPCA{S<:AbstractArray, T<:AbstractArray}
     P::S
@@ -131,6 +136,10 @@ end
 
 function ReconstructPCA(P::MultivariateStats.PCA{S}) where {S<:AbstractFloat}
     return ReconstructPCA(P.proj, P.mean)
+end
+
+function ReconstructPCA1(P::OnlineStats.CCIPCA)
+    return ReconstructPCA1(P.U, P.center)
 end
 
 Flux.@functor ReconstructPCA
@@ -168,6 +177,8 @@ to normalize its input.
 The input `x` must be a vector of equal length to both `μ` and `σ` or
 an array with dimensions such that the broadcasted functions can be used
 with the given `μ` and `σ`. No parameters are trainable.
+
+See also: [`Denormalize`](@ref)
 """
 struct Normalize{S<:AbstractArray}
     μ::S
@@ -204,6 +215,8 @@ to restore its input from a normalized state.
 The input `x` must be a vector of equal length to both `μ` and `σ` or
 an array with dimensions such that the broadcasted functions can be used
 with the given `μ` and `σ`. No parameters are trainable.
+
+See also: [`Normalize`](@ref)
 """
 struct Denormalize{S<:AbstractArray}
     μ::S

@@ -345,6 +345,18 @@ git-tree-sha1 = "9db93b990af57b3a56dca38476832f60d58f777b"
 uuid = "6fe1bfb0-de20-5000-8ca7-80f57d26f881"
 version = "1.4.0"
 
+[[OnlineStats]]
+deps = ["AbstractTrees", "Dates", "LinearAlgebra", "OnlineStatsBase", "OrderedCollections", "Random", "RecipesBase", "Statistics", "StatsBase", "SweepOperator"]
+git-tree-sha1 = "a3d0e72ffde4f596cc148c4c6555e310dcd5b2ba"
+uuid = "a15396b6-48d5-5d58-9928-6d29437db91e"
+version = "1.5.8"
+
+[[OnlineStatsBase]]
+deps = ["AbstractTrees", "Dates", "LinearAlgebra", "OrderedCollections", "Statistics", "StatsBase"]
+git-tree-sha1 = "ed076aedbd3cb85731730268d60a7acfa4ac92f3"
+uuid = "925886fa-5bf2-5e8e-b522-a9147a512338"
+version = "1.4.4"
+
 [[OpenBLAS_jll]]
 deps = ["CompilerSupportLibraries_jll", "Libdl", "Pkg"]
 git-tree-sha1 = "0c922fd9634e358622e333fc58de61f05a048492"
@@ -393,6 +405,11 @@ uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 [[Random]]
 deps = ["Serialization"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+
+[[RecipesBase]]
+git-tree-sha1 = "b3fb709f3c97bfc6e948be68beeecb55a0b340ae"
+uuid = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
+version = "1.1.1"
 
 [[Reexport]]
 deps = ["Pkg"]
@@ -468,6 +485,12 @@ deps = ["DataAPI", "DataStructures", "LinearAlgebra", "Missings", "Printf", "Ran
 git-tree-sha1 = "7bab7d4eb46b225b35179632852b595a3162cb61"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 version = "0.33.2"
+
+[[SweepOperator]]
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "20da2784e79fc0bfdd70592d1b47d7a6034e82d1"
+uuid = "7522ee7d-7047-56d0-94d9-4bc626e7058d"
+version = "0.3.0"
 
 [[Test]]
 deps = ["Distributed", "InteractiveUtils", "Logging", "Random"]

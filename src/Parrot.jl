@@ -10,7 +10,7 @@ module Parrot
     #
     # State packages we're using.
     #
-    using Flux, MultivariateStats, Random, Statistics
+    using Flux, MultivariateStats, OnlineStats, Random, Statistics
 
     #
     # Export really useful things from Parrot.
@@ -21,7 +21,7 @@ module Parrot
     # Include source code files.
     #
     include("layers.jl")
-    include("prospect.jl")
+    # include("prospect.jl")
     include("utils.jl")
 
 end
