@@ -23,14 +23,14 @@ emulating stellar population synthesis codes.
 
 # Example
 ```
-julia> a = Alsing(8,3)
+julia> a = Alsing(8, 3)
 Alsing(8, 3)
 
 julia> a(rand(8))
-3-element Array{Float64,1}:
-  0.9555069887698046
-  0.14443222298921962
- -0.06765412728860333
+3-element Array{Float32,1}:
+ 0.9413336
+ 0.30788675
+ 0.5125884
 ```
 """
 struct Alsing{S<:AbstractArray, T<:AbstractArray}
