@@ -58,11 +58,7 @@ function Base.show(io::IO, l::Alsing)
 end
 
 #
-# This next bit of code is an optimization inspired by what Flux does for its
-# Dense layer. While it's not entirely clear to me what this is doing, it
-# apparently tells Julia to avoid generic matmul and instead hit more optimized
-# matmul instead. I've also noticed this seems to force Float32 a bit more? Not
-# a bad thing.
+# Efficiency hack.
 #
 (a::Alsing{W})(x::AbstractArray{T}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
     invoke(a, Tuple{AbstractArray}, x)
@@ -106,6 +102,15 @@ function Base.show(io::IO, l::TransformPCA)
     print(io, "TransformPCA(", size(l.Pt, 2), ", ", size(l.Pt, 1), ")")
 end
 
+#
+# Efficiency hack.
+#
+(t::TransformPCA{W})(x::AbstractArray{T}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
+    invoke(t, Tuple{AbstractArray}, x)
+
+(t::TransformPCA{W})(x::AbstractArray{<:AbstractFloat}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
+    a(T.(x))
+
 
 """
     ReconstructPCA(P::MultivariateStats.PCA{AbstractFloat})
@@ -140,6 +145,15 @@ end
 function Base.show(io::IO, l::ReconstructPCA)
     print(io, "ReconstructPCA(", size(l.P, 2), ", ", size(l.P, 1), ")")
 end
+
+#
+# Efficiency hack.
+#
+(t::ReconstructPCA{W})(x::AbstractArray{T}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
+    invoke(t, Tuple{AbstractArray}, x)
+
+(t::ReconstructPCA{W})(x::AbstractArray{<:AbstractFloat}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
+    a(T.(x))
 
 
 """
