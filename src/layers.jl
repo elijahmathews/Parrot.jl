@@ -78,20 +78,19 @@ Create a `TransformPCA` layer that uses Principal Component Analysis (PCA)
 to transform its input into the PCA basis using a given MultivariateStats.PCA
 object `P`.
 
-    y = MultivariateStats.transform(P, x)
-
 The input `x` must have dimensions compatible with `P` and the layer's output
 will be of the dimensions given by the PCA transformation. No parameters are
 trainable.
 
 See also: [`MultivariateStats.PCA`](@ref), [`MultivariateStats.transform`](@ref)
 """
-struct TransformPCA{S<:AbstractFloat}
-    P::MultivariateStats.PCA{S}
+struct TransformPCA{S<:AbstractArray, T<:AbstractArray}
+    Pt::S
+    μ::T
 end
 
-function TransformPCA(P::MultivariateStats.PCA{AbstractFloat})
-    return TransformPCA(P)
+function TransformPCA(P::MultivariateStats.PCA{S}) where {S<:AbstractFloat}
+    return TransformPCA(permutedims(P.proj), P.mean)
 end
 
 Flux.@functor TransformPCA
@@ -99,12 +98,12 @@ Flux.@functor TransformPCA
 Flux.trainable(t::TransformPCA) = ()
 
 function (t::TransformPCA)(x::AbstractArray)
-    P = t.P
-    MultivariateStats.transform(P,x)
+    Pt, μ = t.Pt, t.μ
+    Pt * (x .- μ)
 end
 
 function Base.show(io::IO, l::TransformPCA)
-    print(io, "TransformPCA(", l.P, ")")
+    print(io, "TransformPCA(", size(l.Pt, 2), ", ", size(l.Pt, 1), ")")
 end
 
 
@@ -114,20 +113,19 @@ end
 Create a `ReconstructPCA` layer that uses Principal Component Analysis (PCA)
 to reconstruct its input using a given MultivariateStats.PCA object `P`.
 
-    y = MultivariateStats.reconstruct(P, x)
-
 The input `x` must have dimensions compatible with `P` and the layer's output
 will be of the dimensions given by the PCA reconstruction. No parameters are
 trainable.
 
 See also: [`MultivariateStats.PCA`](@ref), [`MultivariateStats.reconstruct`](@ref)
 """
-struct ReconstructPCA{S<:AbstractFloat}
-    P::MultivariateStats.PCA{S}
+struct ReconstructPCA{S<:AbstractArray, T<:AbstractArray}
+    P::S
+    μ::T
 end
 
-function ReconstructPCA(P::MultivariateStats.PCA{AbstractFloat})
-    return ReconstructPCA(P)
+function ReconstructPCA(P::MultivariateStats.PCA{S}) where {S<:AbstractFloat}
+    return ReconstructPCA(P.proj, P.mean)
 end
 
 Flux.@functor ReconstructPCA
@@ -135,12 +133,12 @@ Flux.@functor ReconstructPCA
 Flux.trainable(r::ReconstructPCA) = ()
 
 function (r::ReconstructPCA)(x::AbstractArray)
-    P = r.P
-    MultivariateStats.reconstruct(P,x)
+    P, μ = r.P, r.μ
+    P * x .+ μ
 end
 
 function Base.show(io::IO, l::ReconstructPCA)
-    print(io, "ReconstructPCA(", l.P, ")")
+    print(io, "ReconstructPCA(", size(l.P, 2), ", ", size(l.P, 1), ")")
 end
 
 
