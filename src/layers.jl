@@ -78,7 +78,7 @@ The input `x` must have dimensions compatible with `P` and the layer's output
 will be of the dimensions given by the PCA transformation. No parameters are
 trainable.
 
-See also: [`Flux.ReconstructPCA`](@ref)
+See also: [`ReconstructPCA`](@ref)
 """
 struct TransformPCA{S<:AbstractArray, T<:AbstractArray}
     Pt::S
@@ -127,7 +127,7 @@ The input `x` must have dimensions compatible with `P` and the layer's output
 will be of the dimensions given by the PCA reconstruction. No parameters are
 trainable.
 
-See also: [`Flux.TransformPCA`](@ref)
+See also: [`TransformPCA`](@ref)
 """
 struct ReconstructPCA{S<:AbstractArray, T<:AbstractArray}
     P::S
@@ -229,7 +229,7 @@ end
 
 Flux.@functor Denormalize
 
-Flux.trainable(d::Denormalize) = ()
+Flux.trainabe(d::Denormalize) = ()
 
 function (d::Denormalize)(x::AbstractArray)
     μ, σ = d.μ, d.σ
