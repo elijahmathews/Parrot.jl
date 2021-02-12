@@ -89,8 +89,8 @@ function TransformPCA(P::MultivariateStats.PCA{S}) where {S<:AbstractFloat}
     return TransformPCA(permutedims(P.proj), P.mean)
 end
 
-function TransformPCA1(P::OnlineStats.CCIPCA)
-    return TransformPCA1(permutedims(P.U), P.center)
+function TransformPCA(P::OnlineStats.CCIPCA)
+    return TransformPCA(permutedims(P.U), P.center)
 end
 
 Flux.@functor TransformPCA
@@ -138,8 +138,8 @@ function ReconstructPCA(P::MultivariateStats.PCA{S}) where {S<:AbstractFloat}
     return ReconstructPCA(P.proj, P.mean)
 end
 
-function ReconstructPCA1(P::OnlineStats.CCIPCA)
-    return ReconstructPCA1(P.U, P.center)
+function ReconstructPCA(P::OnlineStats.CCIPCA)
+    return ReconstructPCA(P.U, P.center)
 end
 
 Flux.@functor ReconstructPCA
