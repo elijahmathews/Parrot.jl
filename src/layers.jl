@@ -158,11 +158,11 @@ end
 #
 # Efficiency hack.
 #
-(t::ReconstructPCA{W})(x::AbstractArray{T}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
-    invoke(t, Tuple{AbstractArray}, x)
+(r::ReconstructPCA{W})(x::AbstractArray{T}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
+    invoke(r, Tuple{AbstractArray}, x)
 
-(t::ReconstructPCA{W})(x::AbstractArray{<:AbstractFloat}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
-    a(T.(x))
+(r::ReconstructPCA{W})(x::AbstractArray{<:AbstractFloat}) where {T <: Union{Float32,Float64}, W <: AbstractArray{T}} =
+    r(T.(x))
 
 
 """
