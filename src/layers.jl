@@ -199,7 +199,7 @@ function (n::Normalize)(x::AbstractArray)
 end
 
 function Base.show(io::IO, l::Normalize)
-    print(io, "Normalize(", size(l.μ, 2), ", ", size(l.μ, 2), ")")
+    print(io, "Normalize(", size(l.μ, 1), ", ", size(l.μ, 1), ")")
 end
 
 
@@ -237,6 +237,6 @@ function (d::Denormalize)(x::AbstractArray)
 end
 
 function Base.show(io::IO, l::Denormalize)
-    print(io, "Denormalize(", size(l.μ, 2), ", ", size(l.μ, 2), ")")
+    print(io, "Denormalize(", size(l.μ, 1), ", ", size(l.μ, 1), ")")
 end
 
