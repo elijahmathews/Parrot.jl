@@ -3,12 +3,12 @@
 
 ## Installation
 
-First, please install Julia on your system by following the steps listed on the [Julia website](https://julialang.org/downloads/). This package is currently being developed and tested on Julia v1.5.
+First, please install Julia on your system by following the steps listed on the [Julia website](https://julialang.org/downloads/). This package is currently being developed and tested on Julia v1.6.
 
 To install Parrot, open a Julia REPL and type `]` (to enter the Pkg REPL) followed by:
 
 ```
-(@v1.5) pkg> add https://github.com/elijahmathews/Parrot.jl.git
+(@v1.6) pkg> add https://github.com/elijahmathews/Parrot.jl.git
 ```
 
 Or alternatively, run the following code directly at the Julia REPL:
