@@ -2,7 +2,7 @@
 The MIT License (MIT)
 =====================
 
-Copyright © 2020 Elijah Mathews
+Copyright © 2020-2021 Elijah Mathews
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
